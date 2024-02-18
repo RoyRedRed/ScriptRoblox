@@ -29,3 +29,10 @@ local Tabs = {
 }
 
 local Options = Fluent.Options
+
+Tab:AddButton({
+	Name = "Banned Acc",
+	Callback = function()
+      		print("Banned 999 Day")
+  	end    
+})
