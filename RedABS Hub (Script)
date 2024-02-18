@@ -8,7 +8,7 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 
 local Window = Fluent:CreateWindow({
 
-    Title = "RedABS Hub (Blox Fruit)",
+    Title = "RedABS Hub (Script Troll)",
 
     SubTitle = "Create by RoyRedRed",
 
