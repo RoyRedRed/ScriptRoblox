@@ -33,7 +33,7 @@ local bodyPosition = Instance.new("BodyPosition")
 bodyPosition.MaxForce = Vector3.new(9e9, 9e9, 9e9)
 
 local function startFlying()
-    if isFlying then return end -- Kiểm tra nếu đang bay thì không làm gì
+    if isFlying then return end
     isFlying = true
     bodyPosition.Parent = humanoid.Parent.PrimaryPart
     while isFlying do
@@ -41,13 +41,41 @@ local function startFlying()
         wait(0.1)
     end
 end
+local function stopFlying()
+    if not isFlying then return end
+    stopFlyingAnimation()
+end
+
+local function stopFlyingAnimation()
+    local primaryPart = humanoid.Parent.PrimaryPart
+    local currentPosition = primaryPart.Position
+    local targetPosition = currentPosition - Vector3.new(0, 10, 0) --
+
+    local tweenInfo = TweenInfo.new(
+        1,
+        Enum.EasingStyle.Quad, -- Kiểu easing
+        Enum.EasingDirection.Out, -- Hướng easing
+        0,
+        false,
+        0
+    )
+
+    local tween = TweenService:Create(primaryPart, tweenInfo, {Position = targetPosition})
+    tween:Play()
+    tween.Completed:Connect(function()
+        isFlying = false
+        primaryPart.Anchored = true
+    end)
+end
+
+local TweenService = game:GetService("TweenService")
 
 local function stopFlying()
     isFlying = false
 end
 
 humanoid.Died:Connect(function()
-    stopFlying() -- Dừng fly khi người chơi chết
+    stopFlying()
 end)
 
 OrionLib:MakeNotification({
