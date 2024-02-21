@@ -28,12 +28,14 @@ local humanoid = character:WaitForChild("Humanoid")
 
 local flySpeed = 5
 
-local function fly()
-    while true do
-        local moveDirection = Vector3.new(0, 1, 0)
-        local moveVector = moveDirection * flySpeed
-        humanoid:Move(moveVector)
+local bodyVelocity = Instance.new("BodyVelocity")
+bodyVelocity.MaxForce = Vector3.new(9e9, 9e9, 9e9)
+bodyVelocity.P = 1e4
 
+local function fly()
+    bodyVelocity.Parent = humanoid.Parent.PrimaryPart
+    while true do
+        bodyVelocity.Velocity = Vector3.new(0, flySpeed, 0)
         wait(0.1)
     end
 end
