@@ -1,32 +1,27 @@
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/thanhdat4461/OrionMoblie/main/source')))()
 
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local Window = OrionLib:MakeWindow({Name = "RedABS (Fly)", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
 
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
-
---------------------------------------------------------------------------------------------------------------------------------------------
-
-local Window = Fluent:CreateWindow({
-
-    Title = "RedABS Hub (Script Troll)",
-
-    SubTitle = "Create by RoyRedRed",
-
-    TabWidth = 160,
-
-    Size = UDim2.fromOffset(450, 300),
-
-    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
-
-    Theme = "Darker",
-
-    MinimizeKey = Enum.KeyCode.End -- Used when theres no MinimizeKeybind
-
+local Tab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
 })
 
-local Tabs = {
-    Main = Window:AddTab({ Title = "Main", Icon = "home" })
-}
+local Section = Tab:AddSection({
+	Name = "Main"
+})
 
-local Options = Fluent.Options
-                
+OrionLib:MakeNotification({
+	Name = "Welcome",
+	Content = "Oh No",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+
+Tab:AddButton({
+	Name = "Discord",
+	Callback = function()
+      		setclipboard("https://discord.com/invite/TWs3AQdmmH")
+  	end    
+})
