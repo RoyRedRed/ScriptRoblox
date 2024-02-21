@@ -22,6 +22,26 @@ local Section2 = Tab2:AddSection({
     Name = "Flying"
 })
 
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+local flySpeed = 5
+
+local function fly()
+    while true do
+        local moveDirection = Vector3.new(0, 1, 0)
+        local moveVector = moveDirection * flySpeed
+        humanoid:Move(moveVector)
+
+        wait(0.1)
+    end
+end
+
+humanoid.Died:Connect(function()
+    flySpeed = 0
+end)
+
 OrionLib:MakeNotification({
     Name = "Welcome",
     Content = "Oh No",
@@ -45,12 +65,10 @@ Tab2:AddButton({
     end    
 })
 
-local flySpeed = 5
-
 Tab2:AddSlider({
     Name = "Speed",
     Min = 0,
-    Max = 1000,
+    Max = 20,
     Default = 5,
     Color = Color3.fromRGB(255,255,255),
     Increment = 1,
@@ -59,23 +77,5 @@ Tab2:AddSlider({
         flySpeed = Value
     end
 })    
-
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
-
-local function fly()
-    while true do
-        local moveDirection = Vector3.new(0, 1, 0)
-        local moveVector = moveDirection * flySpeed
-        humanoid:Move(moveVector)
-
-        wait(0.1)
-    end
-end
-
-humanoid.Died:Connect(function()
-    flySpeed = 0
-end)
 
 OrionLib:Init()
