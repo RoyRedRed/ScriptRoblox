@@ -42,7 +42,7 @@ Tab:AddButton({
 Tab2:AddButton({
 	Name = "Fly",
 	Callback = function()
-      		
+      		fly()
   	end    
 })
 
@@ -55,9 +55,26 @@ Tab2:AddSlider({
 	Increment = 1,
 	ValueName = "FlySpeed",
 	Callback = function(Value)
-		print(Value)
+   local flySpeed = Value
 	end
 })    
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+local function fly()
+    while true do
+        local moveDirection = Vector3.new(0, 1, 0)
+        local moveVector = moveDirection * flySpeed
+        humanoid:Move(moveVector)
+
+        wait(0.1)
+    end
+end
+
+humanoid.Died:Connect(function()
+    flySpeed = 0
 
 OrionLib:Init()
 
