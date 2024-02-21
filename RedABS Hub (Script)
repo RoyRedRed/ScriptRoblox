@@ -27,20 +27,27 @@ local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
 
 local flySpeed = 5
+local isFlying = false -- Biến đánh dấu trạng thái fly
 
 local bodyPosition = Instance.new("BodyPosition")
 bodyPosition.MaxForce = Vector3.new(9e9, 9e9, 9e9)
 
-local function fly()
+local function startFlying()
+    if isFlying then return end -- Kiểm tra nếu đang bay thì không làm gì
+    isFlying = true
     bodyPosition.Parent = humanoid.Parent.PrimaryPart
-    while true do
+    while isFlying do
         bodyPosition.Position = humanoid.Parent.PrimaryPart.Position + Vector3.new(0, flySpeed, 0)
         wait(0.1)
     end
 end
 
+local function stopFlying()
+    isFlying = false
+end
+
 humanoid.Died:Connect(function()
-    flySpeed = 0
+    stopFlying() -- Dừng fly khi người chơi chết
 end)
 
 OrionLib:MakeNotification({
@@ -62,7 +69,11 @@ Tab:AddButton({
 Tab2:AddButton({
     Name = "Fly",
     Callback = function()
-        fly()
+        if isFlying then
+            stopFlying() -- Nếu đang bay thì tắt fly
+        else
+            startFlying() -- Nếu không đang bay thì bắt đầu fly
+        end
     end    
 })
 
