@@ -3,60 +3,61 @@ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/tha
 local Window = OrionLib:MakeWindow({Name = "RedABS (Fly) | Version 1.0", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
 
 local Tab = Window:MakeTab({
-	Name = "Home",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
+    Name = "Home",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
 })
 
 local Tab2 = Window:MakeTab({
-	Name = "Main",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
+    Name = "Main",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
 })
 
 local Section = Tab:AddSection({
-	Name = "Main"
+    Name = "Main"
 })
 
-local Section = Tab2:AddSection({
-	Name = "Flying"
+local Section2 = Tab2:AddSection({
+    Name = "Flying"
 })
 
 OrionLib:MakeNotification({
-	Name = "Welcome",
-	Content = "Oh No",
-	Image = "rbxassetid://4483345998",
-	Time = 5
+    Name = "Welcome",
+    Content = "Oh No",
+    Image = "rbxassetid://4483345998",
+    Time = 5
 })
 
-Tab:AddLabel("Script Create By RoyRedRed
-Bad Tom")
+Tab:AddLabel("Script Create By RoyRedRed Bad Tom")
 
 Tab:AddButton({
-	Name = "Discord",
-	Callback = function()
-      		setclipboard("https://discord.com/invite/TWs3AQdmmH")
-  	end    
+    Name = "Discord",
+    Callback = function()
+        setclipboard("https://discord.com/invite/TWs3AQdmmH")
+    end    
 })
 
 Tab2:AddButton({
-	Name = "Fly",
-	Callback = function()
-      		fly()
-  	end    
+    Name = "Fly",
+    Callback = function()
+        fly()
+    end    
 })
 
+local flySpeed = 5
+
 Tab2:AddSlider({
-	Name = "Speed",
-	Min = 0,
-	Max = 20,
-	Default = 5,
-	Color = Color3.fromRGB(255,255,255),
-	Increment = 1,
-	ValueName = "FlySpeed",
-	Callback = function(Value)
-   local flySpeed = Value
-	end
+    Name = "Speed",
+    Min = 0,
+    Max = 1000,
+    Default = 5,
+    Color = Color3.fromRGB(255,255,255),
+    Increment = 1,
+    ValueName = "FlySpeed",
+    Callback = function(Value)
+        flySpeed = Value
+    end
 })    
 
 local player = game.Players.LocalPlayer
@@ -75,8 +76,6 @@ end
 
 humanoid.Died:Connect(function()
     flySpeed = 0
+end)
 
 OrionLib:Init()
-
-wait(500)
-OrionLib:Destroy()
