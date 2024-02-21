@@ -3,6 +3,12 @@ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/tha
 local Window = OrionLib:MakeWindow({Name = "RedABS (Fly) | Version 1.0", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
 
 local Tab = Window:MakeTab({
+	Name = "Home",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Tab2 = Window:MakeTab({
 	Name = "Main",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
@@ -10,6 +16,10 @@ local Tab = Window:MakeTab({
 
 local Section = Tab:AddSection({
 	Name = "Main"
+})
+
+local Section = Tab:AddSection({
+	Name = "Flying"
 })
 
 OrionLib:MakeNotification({
@@ -28,3 +38,8 @@ Tab:AddButton({
       		setclipboard("https://discord.com/invite/TWs3AQdmmH")
   	end    
 })
+
+OrionLib:Init()
+
+wait(500)
+OrionLib:Destroy()
