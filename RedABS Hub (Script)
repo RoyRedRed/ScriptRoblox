@@ -18,7 +18,7 @@ local Section = Tab:AddSection({
 	Name = "Main"
 })
 
-local Section = Tab:AddSection({
+local Section = Tab2:AddSection({
 	Name = "Flying"
 })
 
@@ -38,6 +38,26 @@ Tab:AddButton({
       		setclipboard("https://discord.com/invite/TWs3AQdmmH")
   	end    
 })
+
+Tab2:AddButton({
+	Name = "Fly",
+	Callback = function()
+      		setclipboard("https://discord.com/invite/TWs3AQdmmH")
+  	end    
+})
+
+Tab2:AddSlider({
+	Name = "Speed",
+	Min = 0,
+	Max = 20,
+	Default = 5,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "FlySpeed",
+	Callback = function(Value)
+		print(Value)
+	end
+})    
 
 OrionLib:Init()
 
